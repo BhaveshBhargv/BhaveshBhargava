@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bhavesh Bhargava — Data Scientist &amp; ML Engineer</title>
+<meta name="description" content="Bhavesh Bhargava — Software Engineer transitioning into Data Science &amp; Machine Learning. MSc Advanced Data Science, University of Exeter. 5 years of engineering experience." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0A0E17;
+    --ink-2:#0D1220;
+    --panel:#111726;
+    --panel-2:#161D2E;
+    --line:rgba(255,255,255,0.08);
+    --line-strong:rgba(255,255,255,0.14);
+    --text:#EAECF2;
+    --muted:#9AA3B8;
+    --muted-2:#6D7690;
+    --aqua:#35E4D4;
+    --violet:#7C5CFF;
+    --grad:linear-gradient(105deg,var(--violet),var(--aqua));
+    --grad-soft:linear-gradient(105deg,rgba(124,92,255,.16),rgba(53,228,212,.16));
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    font-weight:450;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(53,228,212,.28)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--aqua);display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--grad)}
+
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.02em}
+  .gradient-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    backdrop-filter:blur(14px);
+    background:rgba(10,14,23,.62);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s,background .3s;
+  }
+  header.nav.scrolled{border-bottom:1px solid var(--line);background:rgba(10,14,23,.86)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Space Grotesk";font-weight:700;letter-spacing:-.01em;font-size:17px}
+  .brand .dot{width:34px;height:34px;border-radius:9px;background:var(--grad-soft);border:1px solid var(--line-strong);display:grid;place-items:center;position:relative;overflow:hidden}
+  .brand .dot svg{width:22px;height:12px}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a.link{font-family:"JetBrains Mono";font-size:13px;color:var(--muted);letter-spacing:.02em;transition:color .2s;position:relative}
+  .nav-links a.link:hover{color:var(--text)}
+  .nav-links a.link::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease)}
+  .nav-links a.link:hover::after{transform:scaleX(1)}
+  .nav-links a.link:active{transform:scale(.97)}
+  .nav-social{display:flex;align-items:center;gap:8px;margin-left:6px}
+  .icon-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:.2s var(--ease);background:rgba(255,255,255,.02)}
+  .icon-btn:hover{color:var(--text);border-color:var(--line-strong);transform:translateY(-2px)}
+  .icon-btn svg{width:18px;height:18px}
+  .btn-resume{font-family:"JetBrains Mono";font-size:13px;padding:9px 16px;border-radius:9px;border:1px solid var(--line-strong);color:var(--text);display:inline-flex;align-items:center;gap:8px;transition:.22s var(--ease)}
+  .btn-resume:hover{border-color:var(--aqua);color:var(--aqua);box-shadow:0 0 0 1px rgba(53,228,212,.25)}
+  .nav-toggle{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:9px;background:none;color:var(--text);cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:88px 0 70px;overflow:hidden}
+  .grid-bg{position:absolute;inset:0;z-index:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:52px 52px;
+    -webkit-mask-image:radial-gradient(120% 90% at 70% 20%,#000 30%,transparent 80%);
+    mask-image:radial-gradient(120% 90% at 70% 20%,#000 30%,transparent 80%);
+    opacity:.5;
+  }
+  .glow{position:absolute;z-index:0;filter:blur(80px);opacity:.5;pointer-events:none}
+  .glow.a{width:420px;height:420px;background:radial-gradient(circle,rgba(124,92,255,.55),transparent 65%);top:-120px;right:6%}
+  .glow.b{width:360px;height:360px;background:radial-gradient(circle,rgba(53,228,212,.4),transparent 65%);top:180px;left:-80px}
+  .hero-inner{position:relative;z-index:2}
+  .hero h1{font-size:clamp(46px,8.2vw,104px);letter-spacing:-.035em;margin:20px 0 0}
+  .hero .role{display:block;font-size:clamp(18px,2.2vw,26px);font-family:"Space Grotesk";font-weight:500;color:var(--muted);margin-top:16px;letter-spacing:-.01em}
+  .hero .role b{color:var(--text);font-weight:600}
+  .hero-lede{max-width:620px;margin-top:26px;font-size:clamp(16px,1.6vw,18.5px);color:var(--muted);line-height:1.72}
+  .hero-lede b{color:var(--text);font-weight:600}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .btn{font-family:"JetBrains Mono";font-size:14px;padding:14px 22px;border-radius:11px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;transition:.24s var(--ease);border:1px solid transparent}
+  .btn svg{width:16px;height:16px}
+  .btn-primary{background:var(--grad);color:#06110f;font-weight:600;box-shadow:0 8px 30px -8px rgba(53,228,212,.5)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px -8px rgba(53,228,212,.6)}
+  .btn-ghost{border-color:var(--line-strong);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--aqua);color:var(--aqua);transform:translateY(-3px)}
+  /* press feedback (find-animation opp #1) */
+  .btn:active{transform:translateY(-1px) scale(.98);transition-duration:.12s}
+  .btn-resume:active,.icon-btn:active{transform:scale(.95);transition-duration:.12s}
+  .mail-link:active{transform:scale(.99);transition-duration:.12s}
+
+  /* readout waveform */
+  .signal-panel{position:relative;z-index:2;margin-top:60px;overflow:hidden}
+  .signal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line);font-family:"JetBrains Mono";font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+  .signal-head .live{display:inline-flex;align-items:center;gap:8px;color:var(--aqua)}
+  .signal-head .live i{width:8px;height:8px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 0 rgba(53,228,212,.6);animation:ping 1.8s infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(53,228,212,.5)}70%{box-shadow:0 0 0 9px rgba(53,228,212,0)}100%{box-shadow:0 0 0 0 rgba(53,228,212,0)}}
+  .ecg-holder{height:118px;position:relative}
+  .ecg-holder svg{width:100%;height:100%;display:block}
+  .ecg-path{fill:none;stroke:url(#pulseGrad);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:2600;stroke-dashoffset:2600;filter:drop-shadow(0 0 6px rgba(53,228,212,.5));
+    animation:draw 3.4s var(--ease) forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:48px}
+  .stat{flex:1;min-width:140px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .stat .n{font-family:"Bricolage Grotesque";font-weight:700;font-size:30px}
+  .stat .n span{color:var(--faint);font-size:16px}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* ---------- SECTIONS ---------- */
+  section{position:relative;padding:96px 0}
+  .sec-head{margin-bottom:52px;max-width:720px}
+  .sec-head h2{font-size:clamp(30px,4.4vw,46px);margin-top:16px;letter-spacing:-.03em}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:17px;line-height:1.7}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:44px;align-items:start}
+  .about-copy p{color:var(--muted);font-size:17px;line-height:1.8;margin-bottom:18px}
+  .about-copy p b{color:var(--text);font-weight:600}
+  .spec-card{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+  .spec-card .sc-head{padding:16px 20px;border-bottom:1px solid var(--line);font-family:"JetBrains Mono";font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
+  .spec-row{display:flex;justify-content:space-between;gap:16px;padding:15px 20px;border-bottom:1px solid var(--line);font-size:14px}
+  .spec-row:last-child{border-bottom:none}
+  .spec-row .k{font-family:"JetBrains Mono";color:var(--muted-2);font-size:12.5px;letter-spacing:.04em}
+  .spec-row .v{text-align:right;color:var(--text);font-weight:500}
+  .spec-row .v small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:2px}
+
+  /* experience timeline */
+  .timeline{position:relative;margin-left:8px}
+  .timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--violet),var(--aqua),transparent)}
+  .tl-item{position:relative;padding:0 0 46px 44px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-dot{position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;background:var(--ink);border:1px solid var(--line-strong);display:grid;place-items:center}
+  .tl-dot i{width:8px;height:8px;border-radius:50%;background:var(--grad)}
+  .tl-when{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.06em;color:var(--aqua)}
+  .tl-role{font-family:"Space Grotesk";font-weight:600;font-size:20px;margin-top:8px;letter-spacing:-.01em}
+  .tl-role span{color:var(--muted-2);font-weight:500}
+  .tl-list{margin-top:12px;list-style:none;display:grid;gap:9px}
+  .tl-list li{position:relative;padding-left:20px;color:var(--muted);font-size:15px;line-height:1.65}
+  .tl-list li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:1px;background:var(--violet);transform:rotate(45deg)}
+
+  /* projects */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .card{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:26px;overflow:hidden;transition:.32s var(--ease);display:flex;flex-direction:column}
+  .card::before{content:"";position:absolute;inset:0;border-radius:16px;padding:1px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .32s;pointer-events:none}
+  .card:hover{transform:translateY(-6px);background:var(--panel-2)}
+  .card:hover::before{opacity:.9}
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .card-tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--aqua);padding:5px 10px;border:1px solid rgba(53,228,212,.28);border-radius:20px}
+  .card-tag.ml{color:var(--violet);border-color:rgba(124,92,255,.32)}
+  .mini-ecg{width:64px;height:22px;opacity:.85}
+  .card h3{font-size:22px;letter-spacing:-.01em}
+  .card .desc{color:var(--muted);font-size:14.5px;line-height:1.66;margin-top:12px;flex-grow:1}
+  .metric-pill{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:"JetBrains Mono";font-size:12px;color:var(--text);background:var(--grad-soft);border:1px solid var(--line);padding:6px 12px;border-radius:8px;width:fit-content}
+  .metric-pill b{color:var(--aqua)}
+  .tech{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .tech span{font-family:"JetBrains Mono";font-size:11.5px;color:var(--muted);border:1px solid var(--line);padding:4px 9px;border-radius:6px}
+  .card-links{display:flex;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  .card-links a{font-family:"JetBrains Mono";font-size:13px;display:inline-flex;align-items:center;gap:7px;color:var(--muted);transition:.2s;padding:6px 0}
+  .card-links a svg{width:15px;height:15px}
+  .card-links a:hover{color:var(--aqua)}
+  .card-links a.live:hover{color:var(--text)}
+
+  /* skills */
+  .skill-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .skill-col h4{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .skill-col ul{list-style:none;display:grid;gap:10px}
+  .skill-col li{font-size:14.5px;color:var(--text);display:flex;align-items:center;gap:10px}
+  .skill-col li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0}
+
+  /* education */
+  .edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .edu-card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:28px}
+  .edu-card .when{font-family:"JetBrains Mono";font-size:12px;color:var(--aqua);letter-spacing:.04em}
+  .edu-card h3{font-size:21px;margin-top:12px;letter-spacing:-.01em}
+  .edu-card .school{color:var(--muted);font-size:15px;margin-top:6px}
+  .edu-card p{color:var(--muted);font-size:14px;margin-top:14px;line-height:1.65}
+
+  /* contact */
+  .contact{text-align:center;padding:110px 0}
+  .contact h2{font-size:clamp(38px,6vw,72px);letter-spacing:-.035em;line-height:1.02}
+  .contact .sub{color:var(--muted);font-size:18px;margin-top:22px;max-width:520px;margin-left:auto;margin-right:auto}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:40px}
+  .mail-link{font-family:"JetBrains Mono";display:inline-flex;align-items:center;gap:12px;font-size:clamp(15px,2vw,20px);margin-top:34px;color:var(--text);padding-bottom:6px;border-bottom:1px solid var(--line-strong);transition:.24s}
+  .mail-link:hover{border-color:var(--aqua);color:var(--aqua)}
+
+  footer{border-top:1px solid var(--line);padding:34px 0}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot-inner .mono{font-size:12.5px;color:var(--muted-2)}
+  .foot-social{display:flex;gap:8px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* hero load-in stagger (find-animation opp #2) */
+  body:not(.loaded) .load{opacity:0;transform:translateY(14px)}
+  .load{transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .load.d1{transition-delay:.05s}
+  .load.d2{transition-delay:.13s}
+  .load.d3{transition-delay:.21s}
+  .load.d4{transition-delay:.29s}
+  .load.d5{transition-delay:.37s}
+
+  /* responsive */
+  @media(max-width:900px){
+    .nav-links{position:fixed;inset:70px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:rgba(10,14,23,.97);border-bottom:1px solid var(--line);padding:8px 28px 22px;transform:translateY(-140%);transition:transform .34s var(--ease);z-index:55}
+    .nav-links.open{transform:none}
+    .nav-links a.link{padding:15px 0;width:100%;border-bottom:1px solid var(--line);font-size:15px}
+    .nav-social{margin:16px 0 0}
+    .btn-resume{margin-top:6px}
+    .nav-toggle{display:grid;place-items:center}
+    .about-grid{grid-template-columns:1fr;gap:32px}
+    .proj-grid{grid-template-columns:1fr}
+    .skill-grid{grid-template-columns:repeat(2,1fr)}
+    .edu-grid{grid-template-columns:1fr}
+    .stats-strip{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    section{padding:70px 0}
+    .skill-grid{grid-template-columns:1fr}
+    .cta-row .btn{flex:1;justify-content:center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .ecg-path{animation:none;stroke-dashoffset:0}
+    .reveal,.load{opacity:1!important;transform:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .signal-head .live i{animation:none}
+    .reveal.in{transition-delay:0ms!important}
+  }
+  :focus-visible{outline:2px solid var(--aqua);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+<span id="topmark" aria-hidden="true" style="position:absolute;top:0;height:1px;width:1px"></span>
+
+<!-- SVG defs (gradients) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pulseGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C5CFF"/>
+      <stop offset="55%" stop-color="#35E4D4"/>
+      <stop offset="100%" stop-color="#7C5CFF"/>
+    </linearGradient>
+    <linearGradient id="miniGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C5CFF"/>
+      <stop offset="100%" stop-color="#35E4D4"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Bhavesh Bhargava — home">
+      <span class="dot" aria-hidden="true">BB</span>
+      Bhavesh Bhargava
+    </a>
+
+    <nav class="nav-links" id="menu">
+      <a class="link" href="#about">/about</a>
+      <a class="link" href="#experience">/experience</a>
+      <a class="link" href="#projects">/projects</a>
+      <a class="link" href="#skills">/skills</a>
+      <a class="link" href="#contact">/contact</a>
+      <div class="nav-social">
+        <a class="icon-btn" href="https://github.com/BhaveshBhargv" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        </a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/bhaveshbhargv/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04s-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+        </a>
+        <a class="btn-resume" href="documents/Bhavesh_Bhargava_CV.pdf" download aria-label="Download résumé">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Résumé
+        </a>
+      </div>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<main id="top">
+<section class="hero">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="glow a" aria-hidden="true"></div>
+  <div class="glow b" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow load d1">Software Engineer → Data Science &amp; ML</span>
+    <h1 class="load d2">Bhavesh<br /><span class="gradient-text">Bhargava</span></h1>
+    <span class="role load d3">MSc Advanced Data Science <b>·</b> University of Exeter <b>·</b> Exeter, UK</span>
+    <p class="hero-lede load d4">I turn raw data into signals worth acting on. <b>5 years</b> of software and data engineering across fintech and financial services — now building <b>machine learning</b> systems end to end, from ingestion pipelines to trained models to deployed apps.</p>
+
+    <div class="cta-row load d5">
+      <a class="btn btn-primary" href="#projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M13 6l6 6-6 6"/></svg>
+        View projects
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/BhaveshBhargv" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/bhaveshbhargv/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04s-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="stats signal-panel reveal">
+      <div class="stat"><div class="n">5<span> yrs</span></div><div class="l">Industry experience</div></div>
+      <div class="stat"><div class="n">MSc<span></span></div><div class="l">Adv. Data Science</div></div>
+      <!-- <div class="stat"><div class="n">0.80</div><div class="l">Housing model R²</div></div> -->
+      <div class="stat"><div class="n">6</div><div class="l">Live projects and multiple deployed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <span class="eyebrow">About</span>
+        <div class="sec-head" style="margin-bottom:28px">
+          <h2>Engineer's rigour,<br />scientist's curiosity.</h2>
+        </div>
+        <p>I'm a results-driven software engineer transitioning into data science and machine learning, currently pursuing an <b>MSc in Advanced Data Science at the University of Exeter</b> — with coursework spanning machine learning, computer vision, high performance computing and NLP.</p>
+        <p>Over five years in industry I built <b>automated data pipelines</b> at Capgemini, engineered secure <b>REST APIs</b> in Spring Boot, and maintained <b>SQL data workflows</b> for a fintech lending product. That production discipline — data integrity, testing, stakeholder communication — is exactly what applied ML demands.</p>
+        <p>Now I'm channelling it into Python and ML: training CNNs on medical signals, benchmarking regression models, and shipping <b>full-stack AI applications</b> that reach a live URL, not just a notebook.</p>
+      </div>
+
+      <aside class="spec-card reveal">
+        <div class="sc-head">// current_focus</div>
+        <div class="spec-row"><span class="k">status</span><span class="v">Open to DS / ML roles<small>Graduate &amp; internship</small></span></div>
+        <div class="spec-row"><span class="k">based</span><span class="v">Exeter, United Kingdom</span></div>
+        <div class="spec-row"><span class="k">studying</span><span class="v">MSc Advanced Data Science<small>Univ. of Exeter · 2026–2027</small></span></div>
+        <div class="spec-row"><span class="k">stack</span><span class="v">Python · scikit-learn<small>pandas · NumPy · Spring Boot · SQL</small></span></div>
+        <div class="spec-row"><span class="k">domains</span><span class="v">Health · Fintech</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Experience</span>
+      <h2>Five years shipping<br />data-critical software.</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <span class="tl-dot"><i></i></span>
+        <span class="tl-when">JUL 2021 — DEC 2025</span>
+        <div class="tl-role">Associate Consultant <span>· Capgemini</span></div>
+        <ul class="tl-list">
+          <li>Engineered automated data pipelines with Spring Batch for daily client-side processing, ensuring data integrity and reliability at scale — directly applicable to ML training &amp; ingestion pipelines.</li>
+          <li>Built and automated BDD test scenarios with Serenity for Java-based financial services (Discover), improving test coverage and deployment confidence.</li>
+          <li>Partnered with cross-functional client teams to translate business requirements into technical solutions.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <span class="tl-dot"><i></i></span>
+        <span class="tl-when">FEB 2021 — MAY 2021</span>
+        <div class="tl-role">Full-Stack Developer <span>· DigiAppFoundry</span></div>
+        <ul class="tl-list">
+          <li>Built RESTful APIs in Spring Boot with JWT-based security, reducing unauthorised access and improving system integrity.</li>
+          <li>Optimised database query performance by removing redundant calls and restructuring validation logic, improving response times.</li>
+          <li>Contributed to an inventory management portal with full transactional API support.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <span class="tl-dot"><i></i></span>
+        <span class="tl-when">NOV 2019 — JUL 2020</span>
+        <div class="tl-role">Data Engineer <span>· Conflux Technologies</span></div>
+        <ul class="tl-list">
+          <li>Designed and maintained SQL data workflows (Oracle, MySQL) for a fintech lending product (Finflux), supporting data-driven decisions for financial clients.</li>
+          <li>Performed structured data audits — identifying, correcting and documenting data quality issues — a core skill in ML feature engineering.</li>
+          <li>Supported client onboarding by configuring product workflows and validating data integrity across large datasets.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected work</span>
+      <h2>Projects that reach<br />a live URL.</h2>
+      <p>A mix of full-stack AI platforms and focused machine-learning studies — each one shipped, documented, and on GitHub.</p>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- Datanova -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag ml">AI Platform · Live</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Datanova</h3>
+        <p class="desc">An intelligent, end-to-end data analytics platform combining data science, machine learning and AI with modern software engineering into a single application — from ingestion to insight.</p>
+        <div class="tech"><span>Python</span><span>FastAPI</span><span>React</span><span>ML</span></div>
+        <div class="card-links">
+          <a class="btn live" href="https://datanova-six.vercel.app" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live demo
+          </a>
+          <a href="https://github.com/BhaveshBhargv/Datanova" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code
+          </a>
+        </div>
+      </article>
+
+      <!-- SQL Assistant -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag ml">GenAI · Live</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>SQL Assistant</h3>
+        <p class="desc">An AI assistant for enterprise users: ask a question in plain English, preview exactly what the assistant <em>intends</em> to run, then get a safe, read-only answer and a chart — with guardrails first.</p>
+        <div class="tech"><span>Python</span><span>LLM</span><span>NL→SQL</span><span>Safety</span></div>
+        <div class="card-links">
+          <a class="live" href="https://sql-assistant-topaz.vercel.app" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live demo
+          </a>
+          <a href="https://github.com/BhaveshBhargv/Sql-Assistant" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code
+          </a>
+        </div>
+      </article>
+
+      <!-- ECG -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag">Deep Learning · 97%</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>ECG Heartbeat Classification</h3>
+        <p class="desc">A 1D Convolutional Neural Network that classifies ECG heartbeat signals into multiple cardiac categories. Class balancing plus K-Fold cross-validation and hyperparameter tuning for robust generalisation.</p>
+        <div class="metric-pill"><b>97%</b> classification accuracy</div>
+        <div class="tech"><span>PyTorch</span><span>1D CNN</span><span>K-Fold CV</span><span>NumPy</span></div>
+        <div class="card-links">
+          <a href="https://github.com/BhaveshBhargv/ecg-heartbeat-classification" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code &amp; notebook
+          </a>
+        </div>
+      </article>
+
+      <!-- ASSAY Blood -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag ml">ML + RAG · Live</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>ASSAY — Blood Report Insights</h3>
+        <p class="desc">Personalised lifestyle recommendations from blood test reports, blending machine learning with retrieval-augmented generation grounded in clinical guidelines — designed to be defensible, not just plausible.</p>
+        <div class="tech"><span>Python</span><span>RAG</span><span>scikit-learn</span><span>LLM</span></div>
+        <div class="card-links">
+          <a class="live" href="https://bhaveshbhargv-assay-blood-report--streamlit-appdashboard-bi6vfp.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live demo
+          </a>
+          <a href="https://github.com/BhaveshBhargv/ASSAY-Blood-Report-Insights" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code
+          </a>
+        </div>
+      </article>
+
+      <!-- California Housing -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag">Regression · R² 0.80</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>California Housing Prediction</h3>
+        <p class="desc">Benchmarked four models — Linear Regression, Random Forest, SVR and an MLP — to predict median house values, with a full scikit-learn preprocessing pipeline: scaling, one-hot encoding and imputation.</p>
+        <div class="metric-pill"><b>0.80</b> R² on best model</div>
+        <div class="tech"><span>scikit-learn</span><span>pandas</span><span>Random Forest</span><span>MLP</span></div>
+        <div class="card-links">
+          <a href="https://github.com/BhaveshBhargv/california-housing-prediction" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code &amp; notebook
+          </a>
+        </div>
+      </article>
+
+      <!-- Resume Builder -->
+      <article class="card reveal">
+        <div class="card-top">
+          <span class="card-tag ml">Full-Stack · Live</span>
+          <svg class="mini-ecg" viewBox="0 0 64 22" fill="none"><path d="M0 11h10l3-7 4 14 3-7h8l3-5 4 10 3-5h23" stroke="url(#miniGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>ATS Resume Builder</h3>
+        <p class="desc">A web app that builds an ATS-friendly resume tailored to a specific job description — matching content to a posting so applicants clear automated screening with the right keywords and structure.</p>
+        <div class="tech"><span>Python</span><span>NLP</span><span>Web App</span></div>
+        <div class="card-links">
+          <a class="live" href="https://resume-builder-4kmyg83ru5rh6gygffosls.streamlit.app/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live demo
+          </a>
+          <a href="https://github.com/BhaveshBhargv/Resume-builder" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            Code
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:44px" class="reveal">
+      <a class="btn btn-ghost" href="https://github.com/BhaveshBhargv?tab=repositories" target="_blank" rel="noopener" style="display:inline-flex">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        See all repositories
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Toolkit</span>
+      <h2>What I build with.</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-col reveal">
+        <h4>Languages</h4>
+        <ul><li>Python</li><li>Java</li><li>SQL — Oracle, MySQL</li><li>JavaScript</li><li>HTML5 &amp; CSS</li></ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Data &amp; ML</h4>
+        <ul><li>scikit-learn</li><li>pandas · NumPy</li><li>Machine Learning</li><li>Statistical Modelling</li><li>Feature Engineering</li></ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Engineering</h4>
+        <ul><li>Spring Boot</li><li>REST APIs · JWT</li><li>Data Pipelines</li><li>Spring Batch</li><li>BDD Testing</li></ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Tools</h4>
+        <ul><li>Git</li><li>Jupyter Notebook</li><li>Linux — Ubuntu</li><li>IntelliJ · Postman</li><li>Data Visualisation</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Education</span>
+      <h2>Foundations.</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <span class="when">JAN 2026 — JAN 2027 · IN PROGRESS</span>
+        <h3>MSc Advanced Data Science</h3>
+        <div class="school">University of Exeter</div>
+        <p>Coursework spanning Machine Learning, Computer Vision, High Performance Computing and Natural Language Processing — applying Python (scikit-learn, pandas, NumPy) to real modelling projects. Expected graduation January 2027.</p>
+      </div>
+      <div class="edu-card reveal">
+        <span class="when">JUN 2015 — MAY 2019</span>
+        <h3>BE Computer Science Engineering</h3>
+        <div class="school">SVITS, Indore</div>
+        <p>Major project: Driver Drowsiness Detection — a computer-vision alert system to reduce road accidents. Minor project: contactless public-transport payment using fingerprint and RFID.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow" style="justify-content:center">Contact</span>
+      <h2 style="margin-top:18px">Let's build something<br /><span class="gradient-text">signal-worthy.</span></h2>
+      <p class="sub">Open to Data Science and Machine Learning roles — graduate positions and internships. If the work sounds like a fit, I'd love to talk.</p>
+
+      <a class="mail-link" href="mailto:bhavesh.bhargv@gmail.com">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        bhavesh.bhargv@gmail.com
+      </a>
+
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/bhaveshbhargv/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04s-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+          Connect on LinkedIn
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/BhaveshBhargv" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="mono">© 2026 Bhavesh Bhargava · Exeter, UK · +44 7345 101704</span>
+    <div class="foot-social">
+      <a class="icon-btn" href="https://github.com/BhaveshBhargv" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.9 18.3 5.2 18.3 5.2c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+      </a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/bhaveshbhargv/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33 0-3.04-1.85-3.04s-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45Z"/></svg>
+      </a>
+      <a class="icon-btn" href="mailto:bhavesh.bhargv@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scrolled state via sentinel (no scroll listener)
+  const nav=document.getElementById('nav');
+  new IntersectionObserver(([e])=>nav.classList.toggle('scrolled',!e.isIntersecting),{threshold:0})
+    .observe(document.getElementById('topmark'));
+
+  // hero load-in stagger (opp #2)
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('loaded')));
+
+  // mobile menu
+  const toggle=document.getElementById('navToggle');
+  const menu=document.getElementById('menu');
+  toggle.addEventListener('click',()=>{
+    const open=menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',open);
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  // reveal on scroll, with per-sibling stagger (opp #3)
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const sibs=[...e.target.parentElement.children].filter(n=>n.classList.contains('reveal'));
+        const i=Math.max(0,sibs.indexOf(e.target));
+        e.target.style.transitionDelay=Math.min(i*60,240)+'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.14,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
